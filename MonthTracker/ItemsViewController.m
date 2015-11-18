@@ -8,6 +8,7 @@
 
 #import "ItemsViewController.h"
 #import "IncomeStore.h"
+#import "ExpenseStore.h"
 #import "IncomeViewController.h"
 #import "ExpensiveViewController.h"
 
@@ -25,12 +26,17 @@
     // Call the superclass's designated initializer
     self = [super init];
     if (self) {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             [[IncomeStore sharedStore] createItem];
         }
         for (Income *item in [[IncomeStore sharedStore]allSources]) {
             NSLog(@"%@",item);
         }
+        
+        for (int i = 0; i < 7; i++) {
+            [[ExpenseStore sharedStore] createItem];
+        }
+        
         //Create a new bar button item that will send addNewItem: to BNRItemsViewController
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                              target:self
@@ -55,20 +61,22 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    NSArray *items = [[IncomeStore sharedStore] allSources];
+    NSArray *income = [[IncomeStore sharedStore] allSources];
+    NSArray *expenses = [[ExpenseStore sharedStore] allExpenses];
     
     
     if (tableView == self.incomeTableView){
-        return [items count];
+        return [income count];
     }
     else {
-        return [items count];
+        return [expenses count];
     }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView
         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSArray *items = [[IncomeStore sharedStore] allSources];
+    NSArray *income = [[IncomeStore sharedStore] allSources];
+    NSArray *expenses = [[ExpenseStore sharedStore] allExpenses];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
 
@@ -79,11 +87,11 @@
     
     if (tableView == self.incomeTableView) {
         
-        cell.textLabel.text = [items[indexPath.row] description];
+        cell.textLabel.text = [income[indexPath.row] description];
         return cell;
         
     } else{
-        cell.textLabel.text = [items[indexPath.row] description];
+        cell.textLabel.text = [expenses[indexPath.row] description];
     }
     return cell;
    

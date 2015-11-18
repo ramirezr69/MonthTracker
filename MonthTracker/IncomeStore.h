@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @class Income;
-
 @interface IncomeStore : NSObject
 
 @property (nonatomic) NSMutableArray *allSources;

@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "IncomeExpenseViewController.h"
 #import "MonthPickerViewController.h"
 
 @interface AppDelegate ()
