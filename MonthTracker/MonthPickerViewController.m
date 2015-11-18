@@ -7,7 +7,7 @@
 //
 
 #import "MonthPickerViewController.h"
-#import "IncomeExpensiveViewController.h"
+#import "IncomeExpenseViewController.h"
 
 @interface MonthPickerViewController ()
 @property (strong, nonatomic) IBOutlet UIPickerView *monthYearPicker;
@@ -19,6 +19,7 @@
 
 @implementation MonthPickerViewController
 
+NSString *selectedMonth;
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 2;
@@ -57,10 +58,10 @@
     
     //Create a new bar button item that will send addNewItem: to BNRItemsViewController
     /*UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                         target:self
-                                                                         action:@selector(nextView:)];
-    //Seting right bar button
-    self.navigationItem.rightBarButtonItem = bbi;*/
+     target:self
+     action:@selector(nextView:)];
+     //Seting right bar button
+     self.navigationItem.rightBarButtonItem = bbi;*/
     
     
     return self;
@@ -68,34 +69,42 @@
 
 - (IBAction)nextView:(id)sender
 {
+    
     // Creating an instance of IncomeViewController
-    IncomeExpensiveViewController *ievc = [[IncomeExpensiveViewController alloc] init];
+    IncomeExpenseViewController *ievc = [[IncomeExpenseViewController alloc] init];
+    
+    //Set month selected into the next view
+    ievc.monthSelected = selectedMonth;
+    
     // Push it onto the top of the navigation controller's stack
     [self.navigationController pushViewController:ievc
                                          animated:YES];
+    
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     /*NSInteger firstComponentRow = [self.monthYearPicker selectedRowInComponent:0];
-    NSInteger secondComponentRow = [self.monthYearPicker selectedRowInComponent:1];
+     NSInteger secondComponentRow = [self.monthYearPicker selectedRowInComponent:1];
+     
+     switch(firstComponentRow)
+     {
+     }
+     
+     switch(secondComponentRow)
+     {
+     }*/
     
-    switch(firstComponentRow)
-    {
-    }
-    
-    switch(secondComponentRow)
-    {
-    }*/
-    
+    selectedMonth = [NSString stringWithFormat: @"%@, %@", [_year objectAtIndex:[_monthYearPicker selectedRowInComponent:0]],[_month objectAtIndex:[_monthYearPicker selectedRowInComponent:1]]];
     self.testLabel.text = [NSString stringWithFormat: @"%@, %@", [_year objectAtIndex:[_monthYearPicker selectedRowInComponent:0]],[_month objectAtIndex:[_monthYearPicker selectedRowInComponent:1]]];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.year = [[NSMutableArray alloc] initWithObjects: @"2001",@"2002",@"2003",@"2004",@"2005",@"2006",@"2007",@"2008",@"2009",@"2010",@"2011",@"2012",@"2013" @"2014", @"2015", nil];
+    self.year = [[NSMutableArray alloc] initWithObjects: @"2001",@"2002",@"2003",@"2004",@"2005",@"2006",@"2007",@"2008",@"2009",@"2010",@"2011",@"2012",@"2013", @"2014", @"2015", nil];
     
-    self.month = [[NSMutableArray alloc] initWithObjects: @"Jan",@"Feb",@"Mar",@"Apl",@"May",@"Jun",@"July",@"Aug",@"Sep",@"Oct",@"Nov",@"Dec", nil];
+    self.month = [[NSMutableArray alloc] initWithObjects: @"Jan",@"Feb",@"Mar",@"Apr",@"May",@"Jun",@"July",@"Aug",@"Sep",@"Oct",@"Nov",@"Dec", nil];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -105,13 +114,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

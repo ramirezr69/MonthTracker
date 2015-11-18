@@ -6,23 +6,22 @@
 //
 //
 
-#import "IncomeExpensiveViewController.h"
+#import "IncomeExpenseViewController.h"
 #import "IncomeViewController.h"
 #import "ExpensiveViewController.h"
 
-@interface IncomeExpensiveViewController ()
+@interface IncomeExpenseViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *incomeTableView;
 @property (weak, nonatomic) IBOutlet UITableView *expensiveTableView;
 @property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
 
 @end
 
-@implementation IncomeExpensiveViewController
+@implementation IncomeExpenseViewController
 
 - (instancetype)init
 {
-    // Displayint title
-    self.navigationItem.title = @"Month";
+    
     //Create a new bar button item that will send addNewItem: to BNRItemsViewController
     UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                          target:self
@@ -36,6 +35,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    // Displayint title
+    self.navigationItem.title = self.monthSelected;
 }
 
 // Action button right bar button item
@@ -46,7 +47,7 @@
                                                       delegate:self
                                              cancelButtonTitle:@"Cancel"
                                         destructiveButtonTitle:nil
-                                             otherButtonTitles:@"Income", @"Expensive", nil];
+                                             otherButtonTitles:@"Income", @"Expenses", nil];
     [popup showInView:self.view];
 }
 
@@ -56,7 +57,7 @@
     // Calculates tip percentage and total service charge including tip
     switch (buttonIndex)
     {
-        // Go to income view
+            // Go to income view
         case 0:
         {
             // Creating an instance of IncomeViewController
@@ -66,7 +67,7 @@
                                                  animated:YES];
         }
             break;
-        // Go to expensive view
+            // Go to expensive view
         case 1:
         {
             // Creating an instance of IncomeViewController
@@ -92,13 +93,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
