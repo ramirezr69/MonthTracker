@@ -7,7 +7,7 @@
 //
 
 #import "MonthPickerViewController.h"
-#import "IncomeExpenseViewController.h"
+#import "ItemsViewcontroller.h"
 
 @interface MonthPickerViewController ()
 @property (strong, nonatomic) IBOutlet UIPickerView *monthYearPicker;
@@ -71,7 +71,7 @@ NSString *selectedMonth;
 {
     
     // Creating an instance of IncomeViewController
-    IncomeExpenseViewController *ievc = [[IncomeExpenseViewController alloc] init];
+    ItemsViewController *ievc = [[ItemsViewController alloc] init];
     
     //Set month selected into the next view
     ievc.monthSelected = selectedMonth;
