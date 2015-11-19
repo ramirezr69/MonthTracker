@@ -10,7 +10,7 @@ Functionalities completed:
 5. App should extended to multiple months.
 
 Functionalities to work on:
-1. Use Core Data framework to save and retrieve the data. (Ch 23)
+1. Use Core Data framework to save and retrieve the data. (Ch 23)\n
 2. Use "User Preferences" for frequently used values. (Ch 26)
 3. The last row should show the remianing balance, calculated automatically based on what user inputs.
 4. The past month's unused income should be carried forward to the next month.
