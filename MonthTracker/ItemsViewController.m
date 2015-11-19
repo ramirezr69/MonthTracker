@@ -2,7 +2,7 @@
 //  ItemsViewController.m
 //  Expenses
 //
-//  Created by Group8 on 11/17/15.
+//  Created by Group7 on 11/17/15.
 //  Copyright (c) 2015 Group7. All rights reserved.
 //
 
@@ -27,6 +27,8 @@
     // Call the superclass's designated initializer
     self = [super init];
     if (self) {
+        
+        
         
         //Create a new bar button item that will send addNewItem: to BNRItemsViewController
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
@@ -140,6 +142,15 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
                                              animated:YES];
      
     }
+}
+- (NSString *)tableView:(UITableView *)tableView
+titleForFooterInSection:(NSInteger)section{
+    if(tableView == self.incomeTableView){
+        return @"";
+    }else{
+        return @"Remaining Balance";
+    }
+    
 }
 
 
