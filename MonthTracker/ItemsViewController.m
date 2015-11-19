@@ -11,10 +11,11 @@
 #import "ExpenseStore.h"
 #import "IncomeViewController.h"
 #import "ExpensiveViewController.h"
+#import "Income.h"
+#import "Expense.h"
 
 @interface ItemsViewController () 
 @property (weak, nonatomic) IBOutlet UITableView *incomeTableView;
-
 @property (weak, nonatomic) IBOutlet UITableView *expenseTableView;
 
 @end
@@ -26,16 +27,6 @@
     // Call the superclass's designated initializer
     self = [super init];
     if (self) {
-        for (int i = 0; i < 3; i++) {
-            [[IncomeStore sharedStore] createItem];
-        }
-        for (Income *item in [[IncomeStore sharedStore]allSources]) {
-            NSLog(@"%@",item);
-        }
-        
-        for (int i = 0; i < 7; i++) {
-            [[ExpenseStore sharedStore] createItem];
-        }
         
         //Create a new bar button item that will send addNewItem: to BNRItemsViewController
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
@@ -84,7 +75,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
 
-    
     if (tableView == self.incomeTableView) {
         
         cell.textLabel.text = [income[indexPath.row] description];
@@ -106,15 +96,62 @@
     }
 }
 
+// When user clicks on a Course
+- (void)tableView:(UITableView *)tableView
+didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *income = [[IncomeStore sharedStore] allSources];
+    NSArray *expenses = [[ExpenseStore sharedStore] allExpenses];
+    
+    //Handles which table view
+    if (tableView == self.incomeTableView) {
+        
+        // Creating an instance of IncomeViewController
+        IncomeViewController *ivc = [[IncomeViewController alloc] init];
+        
+        //Assign selected row
+        Income *selectedIncome = income[indexPath.row];
+        
+        //Log selected income
+        NSLog(@"Income Table View :%@",selectedIncome);
+        
+        //Set the current income to the one selected
+        ivc.currentIncome = selectedIncome;
+        
+        // Push it onto the top of the navigation controller's stack
+        [self.navigationController pushViewController:ivc
+                                             animated:YES];
+    } else{
+        // Creating an instance of ExpenseViewController
+        ExpensiveViewController *evc = [[ExpensiveViewController alloc] init];
+        
+        //Assign selected row
+        Expense *selectedExpense = expenses[indexPath.row];
+        
+        //Log selected expense
+        NSLog(@"Expense Table View :%@",selectedExpense);
+        
+        
+        //Set the current expense to the one selected
+        evc.currentExpense = selectedExpense;
+        
+        // Push it onto the top of the navigation controller's stack
+        [self.navigationController pushViewController:evc
+                                             animated:YES];
+     
+    }
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self.incomeTableView reloadData];
     [super viewWillAppear:animated];
     // Displayint title
     self.navigationItem.title = self.monthSelected;
 }
 
-// Action button right bar button item
+// Create a new item
 - (IBAction)addIncomeExpensive:(id)sender
 {
     // Creating popup menu for user selection
@@ -136,20 +173,42 @@
         case 0:
         {
             // Creating an instance of IncomeViewController
-            IncomeViewController *ivc = [[IncomeViewController alloc] init];
-            // Push it onto the top of the navigation controller's stack
-            [self.navigationController pushViewController:ivc
-                                                 animated:YES];
+            IncomeViewController *ivc = [[IncomeViewController alloc] initForNewItem:YES];
+            
+            ivc.dismissBlock = ^{
+                [self.incomeTableView reloadData];
+            };
+            
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:ivc];
+            
+            Income *newIncome = [[Income alloc]init];
+            
+            ivc.currentIncome = newIncome;
+            
+            navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            
+            [self presentViewController:navController animated:YES completion:NULL];
         }
             break;
             // Go to expensive view
         case 1:
         {
             // Creating an instance of IncomeViewController
-            ExpensiveViewController *evc = [[ExpensiveViewController alloc] init];
-            // Push it onto the top of the navigation controller's stack
-            [self.navigationController pushViewController:evc
-                                                 animated:YES];
+            ExpensiveViewController *evc = [[ExpensiveViewController alloc] initForNewItem:YES];
+            
+            evc.dismissBlock = ^{
+                [self.expenseTableView reloadData];
+            };
+            
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:evc];
+            
+            Expense *newExpense = [[Expense alloc]init];
+            
+            evc.currentExpense = newExpense;
+            
+            navController.modalPresentationStyle = UIModalPresentationFormSheet;
+            
+            [self presentViewController:navController animated:YES completion:NULL];
         }
             break;
         default:

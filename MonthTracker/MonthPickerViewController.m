@@ -71,13 +71,13 @@ NSString *selectedMonth;
 {
     
     // Creating an instance of IncomeViewController
-    ItemsViewController *ievc = [[ItemsViewController alloc] init];
+    ItemsViewController *ivc = [[ItemsViewController alloc] init];
     
     //Set month selected into the next view
-    ievc.monthSelected = selectedMonth;
+    ivc.monthSelected = selectedMonth;
     
     // Push it onto the top of the navigation controller's stack
-    [self.navigationController pushViewController:ievc
+    [self.navigationController pushViewController:ivc
                                          animated:YES];
     
 }
@@ -94,8 +94,8 @@ NSString *selectedMonth;
      {
      }*/
     
-    selectedMonth = [NSString stringWithFormat: @"%@, %@", [_year objectAtIndex:[_monthYearPicker selectedRowInComponent:0]],[_month objectAtIndex:[_monthYearPicker selectedRowInComponent:1]]];
-    self.testLabel.text = [NSString stringWithFormat: @"%@, %@", [_year objectAtIndex:[_monthYearPicker selectedRowInComponent:0]],[_month objectAtIndex:[_monthYearPicker selectedRowInComponent:1]]];
+    selectedMonth = [NSString stringWithFormat: @"%@, %@", [_month objectAtIndex:[_monthYearPicker selectedRowInComponent:1]],[_year objectAtIndex:[_monthYearPicker selectedRowInComponent:0]]];
+    self.testLabel.text = [NSString stringWithFormat: @"%@, %@", [_month objectAtIndex:[_monthYearPicker selectedRowInComponent:1]],[_year objectAtIndex:[_monthYearPicker selectedRowInComponent:0]]];
     
 }
 
@@ -104,7 +104,7 @@ NSString *selectedMonth;
     
     self.year = [[NSMutableArray alloc] initWithObjects: @"2001",@"2002",@"2003",@"2004",@"2005",@"2006",@"2007",@"2008",@"2009",@"2010",@"2011",@"2012",@"2013", @"2014", @"2015", nil];
     
-    self.month = [[NSMutableArray alloc] initWithObjects: @"Jan",@"Feb",@"Mar",@"Apr",@"May",@"Jun",@"July",@"Aug",@"Sep",@"Oct",@"Nov",@"Dec", nil];
+    self.month = [[NSMutableArray alloc] initWithObjects: @"January",@"Febuary",@"March",@"April",@"May",@"June",@"July",@"August",@"September",@"October",@"November",@"December", nil];
     // Do any additional setup after loading the view from its nib.
 }
 

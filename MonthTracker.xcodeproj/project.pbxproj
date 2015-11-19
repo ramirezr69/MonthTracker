@@ -87,6 +87,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE3B3AD01BFD4EBF004A9B4B /* Expense */ = {
+			isa = PBXGroup;
+			children = (
+				DE3B3ACA1BFD3F05004A9B4B /* Expense.h */,
+				DE3B3ACB1BFD3F05004A9B4B /* Expense.m */,
+				DE3B3ACD1BFD4294004A9B4B /* ExpenseStore.h */,
+				DE3B3ACE1BFD4294004A9B4B /* ExpenseStore.m */,
+				DE5B83A21BFBF73E008F3F2B /* ExpensiveViewController.h */,
+				DE5B83A31BFBF73E008F3F2B /* ExpensiveViewController.m */,
+				DE5B83A41BFBF73E008F3F2B /* ExpensiveViewController.xib */,
+			);
+			name = Expense;
+			sourceTree = "<group>";
+		};
+		DE3B3AD11BFD4ED5004A9B4B /* Income */ = {
+			isa = PBXGroup;
+			children = (
+				DEE8D1A21BFD36D400213F9F /* Income.h */,
+				DEE8D1A31BFD36D400213F9F /* Income.m */,
+				DEE8D1A41BFD36D400213F9F /* IncomeStore.h */,
+				DEE8D1A51BFD36D400213F9F /* IncomeStore.m */,
+				DE5B839D1BFBF607008F3F2B /* IncomeViewController.h */,
+				DE5B839E1BFBF607008F3F2B /* IncomeViewController.m */,
+				DE5B839F1BFBF607008F3F2B /* IncomeViewController.xib */,
+			);
+			name = Income;
+			sourceTree = "<group>";
+		};
 		DE5B835C1BFBD019008F3F2B = {
 			isa = PBXGroup;
 			children = (
@@ -116,20 +144,8 @@
 				DEE8D1AA1BFD37FC00213F9F /* ItemsViewController.h */,
 				DEE8D1AB1BFD37FC00213F9F /* ItemsViewController.m */,
 				DEE8D1AC1BFD37FC00213F9F /* ItemsViewController.xib */,
-				DE5B839D1BFBF607008F3F2B /* IncomeViewController.h */,
-				DE5B839E1BFBF607008F3F2B /* IncomeViewController.m */,
-				DE5B839F1BFBF607008F3F2B /* IncomeViewController.xib */,
-				DE5B83A21BFBF73E008F3F2B /* ExpensiveViewController.h */,
-				DE5B83A31BFBF73E008F3F2B /* ExpensiveViewController.m */,
-				DE5B83A41BFBF73E008F3F2B /* ExpensiveViewController.xib */,
-				DE3B3ACA1BFD3F05004A9B4B /* Expense.h */,
-				DE3B3ACB1BFD3F05004A9B4B /* Expense.m */,
-				DE3B3ACD1BFD4294004A9B4B /* ExpenseStore.h */,
-				DE3B3ACE1BFD4294004A9B4B /* ExpenseStore.m */,
-				DEE8D1A21BFD36D400213F9F /* Income.h */,
-				DEE8D1A31BFD36D400213F9F /* Income.m */,
-				DEE8D1A41BFD36D400213F9F /* IncomeStore.h */,
-				DEE8D1A51BFD36D400213F9F /* IncomeStore.m */,
+				DE3B3AD11BFD4ED5004A9B4B /* Income */,
+				DE3B3AD01BFD4EBF004A9B4B /* Expense */,
 				DE5B83751BFBD019008F3F2B /* Images.xcassets */,
 				DE5B83771BFBD019008F3F2B /* LaunchScreen.xib */,
 				DE5B83681BFBD019008F3F2B /* Supporting Files */,

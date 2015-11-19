@@ -7,13 +7,25 @@
 //
 
 #import "ExpensiveViewController.h"
+#import "ExpenseStore.h"
+#import "Expense.h"
 
 @interface ExpensiveViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *expensiveTypeLabel;
+@property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (weak, nonatomic) IBOutlet UITextField *valueField;
+
+@property (weak, nonatomic) IBOutlet UITextField *dateField;
 
 @end
 
 @implementation ExpensiveViewController
+
+NSString *nString;
+NSString *vString;
+NSString *dString;
+
+
 - (IBAction)expensiveType:(id)sender
 {
     // Creating popup menu for user selection
@@ -74,24 +86,95 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"Expensive";
     self.expensiveTypeLabel.hidden = YES;
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    // You need a NSDateFormatter that will turn a date into a simple date string
+    static NSDateFormatter *dateFormatter;
+    if (!dateFormatter) {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateStyle = NSDateFormatterLongStyle;
+        dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    }
+    
+    NSString *date = [dateFormatter stringFromDate:self.currentExpense.dateOfPurchase];
+    
+    //Display item value upon loading screen
+    self.nameField.text = self.currentExpense.expenseName;
+    self.valueField.text = [NSString stringWithFormat:@"%d$",self.currentExpense.expenseValue];
+    self.dateField.text = date;
+    
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    
+    NSLog(@"viewDidDisappear was called");
+    [super viewWillDisappear:animated];
+    
+    // Clear first responder
+    [self.view endEditing:YES];
+    
+    // "Save" changes to item
+    Expense *saveExpense = self.currentExpense;
+    saveExpense.expenseName =  self.nameField.text;
+    saveExpense.expenseValue = [self.valueField.text intValue];
+    
+    
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (instancetype)initForNewItem:(BOOL)isNew
+{
+    self = [super initWithNibName:nil bundle:nil];
+    
+    if (self) {
+        if (isNew) {
+            
+            UIBarButtonItem *doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                                      target:self
+                                                                                      action:@selector(save:)];
+            self.navigationItem.rightBarButtonItem = doneItem;
+            
+            UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                        target:self
+                                                                                        action:@selector(cancelItem:)];
+            self.navigationItem.leftBarButtonItem = cancelItem;
+        }
+    }
+    
+    return self;
 }
-*/
+
+- (void)save:(id)sender
+{
+    
+    //Assign values to String
+    nString = self.nameField.text;
+    vString = self.valueField.text;
+    dString = self.dateField.text;
+    
+    //Create a new instance of an income
+    Expense *newExpense = [[ExpenseStore sharedStore] createItem];
+    
+    // Create a new BNRItem and add it to the store
+    newExpense.expenseName = nString;
+    newExpense.expenseValue = [vString intValue];
+    newExpense.dateOfPurchase = self.currentExpense.dateOfPurchase;
+    
+    
+    NSLog(@"Expense Added");
+    
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
+}
+
+
+- (void)cancelItem:(id)sender
+{
+    [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
+}
 
 @end
