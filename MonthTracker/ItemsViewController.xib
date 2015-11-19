@@ -2,11 +2,11 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ItemsViewController">
             <connections>
+                <outlet property="balanceLabel" destination="TW9-uC-8Rw" id="8Ux-Iy-0AW"/>
                 <outlet property="expenseTableView" destination="JdP-Zw-EXl" id="pLW-uy-RHL"/>
                 <outlet property="incomeTableView" destination="7aH-va-yeP" id="KMO-ry-Bfi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -21,7 +21,8 @@
                     <rect key="frame" x="8" y="79" width="398" height="193"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="193" id="VYd-8v-KSe"/>
+                        <constraint firstAttribute="height" constant="193" id="91O-AO-zqa"/>
+                        <constraint firstAttribute="width" constant="398" id="cll-FN-Tz6"/>
                     </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="tXz-jA-lWd"/>
@@ -29,25 +30,39 @@
                     </connections>
                 </tableView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="JdP-Zw-EXl">
-                    <rect key="frame" x="8" y="317" width="398" height="342"/>
+                    <rect key="frame" x="8" y="280" width="398" height="265"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="398" id="Np1-Sp-mER"/>
+                        <constraint firstAttribute="height" constant="265" id="XN0-RW-8JA"/>
+                    </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="eEp-Aj-wzN"/>
                         <outlet property="delegate" destination="-1" id="CFw-6f-a4T"/>
                     </connections>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remaining Balance:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TW9-uC-8Rw">
+                    <rect key="frame" x="8" y="558" width="398" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="7aH-va-yeP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="79" id="4KF-sp-4Dg"/>
-                <constraint firstItem="7aH-va-yeP" firstAttribute="width" secondItem="JdP-Zw-EXl" secondAttribute="width" id="UQO-fN-Pei"/>
-                <constraint firstItem="JdP-Zw-EXl" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottomMargin" constant="-69" id="dQL-RZ-lMh"/>
-                <constraint firstItem="JdP-Zw-EXl" firstAttribute="leading" secondItem="7aH-va-yeP" secondAttribute="leading" id="dwO-8i-dTG"/>
-                <constraint firstAttribute="centerX" secondItem="7aH-va-yeP" secondAttribute="centerX" id="mpd-Bs-ZgI"/>
-                <constraint firstItem="JdP-Zw-EXl" firstAttribute="top" secondItem="7aH-va-yeP" secondAttribute="bottom" constant="45" id="wCa-eL-WB3"/>
-                <constraint firstItem="JdP-Zw-EXl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="zQC-8M-jWz"/>
+                <constraint firstItem="TW9-uC-8Rw" firstAttribute="top" secondItem="JdP-Zw-EXl" secondAttribute="bottom" constant="13" id="ASq-Zv-yYL"/>
+                <constraint firstItem="7aH-va-yeP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="79" id="Ihd-tf-Hjd"/>
+                <constraint firstAttribute="trailing" secondItem="7aH-va-yeP" secondAttribute="trailing" constant="8" id="LAI-nv-LeU"/>
+                <constraint firstItem="TW9-uC-8Rw" firstAttribute="leading" secondItem="JdP-Zw-EXl" secondAttribute="leading" id="OJW-Rk-BG3"/>
+                <constraint firstItem="7aH-va-yeP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="P26-t0-Q4b"/>
+                <constraint firstItem="JdP-Zw-EXl" firstAttribute="top" secondItem="7aH-va-yeP" secondAttribute="bottom" constant="8" id="QaN-Ve-Xx1"/>
+                <constraint firstItem="JdP-Zw-EXl" firstAttribute="top" secondItem="7aH-va-yeP" secondAttribute="bottom" constant="8" id="VUT-Sg-5q2"/>
+                <constraint firstItem="JdP-Zw-EXl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="f69-k1-A7Z"/>
+                <constraint firstItem="TW9-uC-8Rw" firstAttribute="trailing" secondItem="JdP-Zw-EXl" secondAttribute="trailing" id="guS-VN-Zwi"/>
+                <constraint firstAttribute="trailing" secondItem="JdP-Zw-EXl" secondAttribute="trailing" constant="8" id="hrn-hg-T6Y"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
             <point key="canvasLocation" x="323" y="350"/>
         </view>

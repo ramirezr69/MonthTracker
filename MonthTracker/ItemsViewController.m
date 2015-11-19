@@ -17,18 +17,19 @@
 @interface ItemsViewController () 
 @property (weak, nonatomic) IBOutlet UITableView *incomeTableView;
 @property (weak, nonatomic) IBOutlet UITableView *expenseTableView;
+@property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
+
 
 @end
 
 @implementation ItemsViewController
+
 
 - (instancetype)init
 {
     // Call the superclass's designated initializer
     self = [super init];
     if (self) {
-        
-        
         
         //Create a new bar button item that will send addNewItem: to BNRItemsViewController
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
@@ -43,7 +44,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,15 +54,32 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    NSArray *income = [[IncomeStore sharedStore] allSources];
+    NSArray *allIncome = [[IncomeStore sharedStore] allSources];
     NSArray *expenses = [[ExpenseStore sharedStore] allExpenses];
+    float totalIncome;
+    float totalExpense;
+    Income *income = [[Income alloc]init];
+    Expense *expense = [[Expense alloc]init];
     
+    
+    for (income in allIncome)
+        totalIncome += income.incomeValue;
+    
+     NSLog(@"Total Income Value is %.2f",totalIncome);
+    
+    for (expense in expenses)
+        totalExpense += expense.expenseValue;
+    
+    NSLog(@"Total Income Value is %.2f",totalExpense);
+    
+    self.balanceLabel.text = [NSString stringWithFormat:@"Remaining Balance: $%.0f", totalIncome - totalExpense];
     
     if (tableView == self.incomeTableView){
-        return [income count];
+        return [allIncome count];
     }
     else {
         return [expenses count];
+        
     }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView
@@ -88,6 +105,7 @@
     return cell;
    
 }
+
 // sets the title for the section headers
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
@@ -143,16 +161,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
      
     }
 }
-- (NSString *)tableView:(UITableView *)tableView
-titleForFooterInSection:(NSInteger)section{
-    if(tableView == self.incomeTableView){
-        return @"";
-    }else{
-        return @"Remaining Balance";
-    }
-    
-}
-
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -160,6 +168,7 @@ titleForFooterInSection:(NSInteger)section{
     [super viewWillAppear:animated];
     // Displayint title
     self.navigationItem.title = self.monthSelected;
+    
 }
 
 // Create a new item
