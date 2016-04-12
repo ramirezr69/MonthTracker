@@ -1,22 +1,21 @@
 //
 //  Income.h
-//  Expenses
+//  MonthTracker
 //
-//  Created by Group8 on 11/17/15.
-//  Copyright (c) 2015 Group7. All rights reserved.
+//  Created by Group7 on 11/24/15.
+//
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface Income : NSObject
+@class Month;
 
-+ (instancetype)randomItem;
+@interface Income : NSManagedObject
 
-@property (nonatomic, copy) NSString *sourceName;
-@property (nonatomic) int incomeValue;
-@property (nonatomic, strong) NSDate *dateReceived;
+@property (nonatomic, retain) NSDate * dateReceived;
+@property (nonatomic) float incomeValue;
+@property (nonatomic, retain) NSString * sourceName;
+@property (nonatomic, retain) Month *month;
 
-
-- (id)initWithSourceName:(NSString *)sourceName
-             incomeValue:(int)value;
 @end

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class Expense;
+@class Month;
 
 @interface ExpensiveViewController : UIViewController < UIActionSheetDelegate>
 
@@ -15,4 +16,5 @@
 @property (nonatomic) Expense *currentExpense;
 - (instancetype)initForNewItem:(BOOL)isNew;
 @property (nonatomic, copy) void (^dismissBlock)(void);
+@property (nonatomic, strong) Month *currentMonth;
 @end

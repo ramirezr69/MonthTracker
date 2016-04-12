@@ -7,22 +7,26 @@
 //
 
 #import "ItemsViewController.h"
-#import "IncomeStore.h"
-#import "ExpenseStore.h"
 #import "IncomeViewController.h"
 #import "ExpensiveViewController.h"
 #import "Income.h"
 #import "Expense.h"
+#import "Month.h"
+#import "MonthStore.h"
+
 
 @interface ItemsViewController () 
 @property (weak, nonatomic) IBOutlet UITableView *incomeTableView;
 @property (weak, nonatomic) IBOutlet UITableView *expenseTableView;
 @property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
-
-
+@property (weak, nonatomic) IBOutlet UILabel *savingsLabel;
+@property (strong, nonatomic) NSMutableArray *allMonths;
+@property (strong, nonatomic) NSMutableArray *myMonths;
 @end
 
 @implementation ItemsViewController
+
+int monthIndex;
 
 
 - (instancetype)init
@@ -37,6 +41,21 @@
                                                                              action:@selector(addIncomeExpensive:)];
         //Seting right bar button
         self.navigationItem.rightBarButtonItem = bbi;
+        
+        [[MonthStore sharedStore] createItem:@"January"];
+        [[MonthStore sharedStore] createItem:@"Febuary"];
+        [[MonthStore sharedStore] createItem:@"March"];
+        [[MonthStore sharedStore] createItem:@"April"];
+        [[MonthStore sharedStore] createItem:@"May"];
+        [[MonthStore sharedStore] createItem:@"June"];
+        [[MonthStore sharedStore] createItem:@"July"];
+        [[MonthStore sharedStore] createItem:@"August"];
+        [[MonthStore sharedStore] createItem:@"September"];
+        [[MonthStore sharedStore] createItem:@"October"];
+        [[MonthStore sharedStore] createItem:@"November"];
+        [[MonthStore sharedStore] createItem:@"December"];
+        
+
     }
         return self;
 }
@@ -44,6 +63,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //Initialize current month to January
+    NSArray *months = [[MonthStore sharedStore] allMonths];
+    //NSArray *months = [[MonthStore sharedStore] allMonths];
+    
+    self.currentMonth = months[0];
+    self.navigationItem.title = self.currentMonth.monthName;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,25 +79,8 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-    NSArray *allIncome = [[IncomeStore sharedStore] allSources];
-    NSArray *expenses = [[ExpenseStore sharedStore] allExpenses];
-    float totalIncome;
-    float totalExpense;
-    Income *income = [[Income alloc]init];
-    Expense *expense = [[Expense alloc]init];
-    
-    
-    for (income in allIncome)
-        totalIncome += income.incomeValue;
-    
-     NSLog(@"Total Income Value is %.2f",totalIncome);
-    
-    for (expense in expenses)
-        totalExpense += expense.expenseValue;
-    
-    NSLog(@"Total Income Value is %.2f",totalExpense);
-    
-    self.balanceLabel.text = [NSString stringWithFormat:@"Remaining Balance: $%.0f", totalIncome - totalExpense];
+    NSArray *allIncome = [self.currentMonth.incomes allObjects];
+    NSArray *expenses = [self.currentMonth.expenses allObjects];
     
     if (tableView == self.incomeTableView){
         return [allIncome count];
@@ -85,8 +93,10 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView
         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSArray *income = [[IncomeStore sharedStore] allSources];
-    NSArray *expenses = [[ExpenseStore sharedStore] allExpenses];
+    NSArray *allIncome = [self.currentMonth.incomes allObjects];
+    NSArray *expenses = [self.currentMonth.expenses allObjects];
+    
+    [self calculateTotal];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
 
@@ -96,7 +106,7 @@
 
     if (tableView == self.incomeTableView) {
         
-        cell.textLabel.text = [income[indexPath.row] description];
+        cell.textLabel.text = [allIncome[indexPath.row] description];
         return cell;
         
     } else{
@@ -120,8 +130,8 @@
 - (void)tableView:(UITableView *)tableView
 didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *income = [[IncomeStore sharedStore] allSources];
-    NSArray *expenses = [[ExpenseStore sharedStore] allExpenses];
+    NSArray *allIncome = [self.currentMonth.incomes allObjects];
+    NSArray *expenses = [self.currentMonth.expenses allObjects];
     
     //Handles which table view
     if (tableView == self.incomeTableView) {
@@ -130,7 +140,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         IncomeViewController *ivc = [[IncomeViewController alloc] init];
         
         //Assign selected row
-        Income *selectedIncome = income[indexPath.row];
+        Income *selectedIncome = allIncome[indexPath.row];
         
         //Log selected income
         NSLog(@"Income Table View :%@",selectedIncome);
@@ -149,8 +159,7 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         Expense *selectedExpense = expenses[indexPath.row];
         
         //Log selected expense
-        NSLog(@"Expense Table View :%@",selectedExpense);
-        
+        NSLog(@"Expense Table View :%@",selectedExpense);        
         
         //Set the current expense to the one selected
         evc.currentExpense = selectedExpense;
@@ -158,7 +167,6 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         // Push it onto the top of the navigation controller's stack
         [self.navigationController pushViewController:evc
                                              animated:YES];
-     
     }
 }
 
@@ -166,9 +174,90 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.incomeTableView reloadData];
     [super viewWillAppear:animated];
-    // Displayint title
-    self.navigationItem.title = self.monthSelected;
+    // Display title
+
+    //Show tool bar
+    self.navigationController.toolbarHidden=NO;
+    UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
     
+    //Add a back button
+    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithTitle:@"Last Month"
+                                                              style:UIBarButtonItemStylePlain
+                                                             target:self
+                                                             action:@selector(backButton:)];
+    
+    //Add a back button
+    UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithTitle:@"Next Month"
+                                                              style:UIBarButtonItemStylePlain
+                                                             target:self
+                                                             action:@selector(nextButton:)];
+    
+    //Add back button to toolbar
+    NSArray *items = [NSArray arrayWithObjects:item1,flexible,item2, nil];
+    self.toolbarItems = items;
+    
+}
+
+- (IBAction) backButton:(id) sender{
+    if(monthIndex == 0){
+        monthIndex = 11;
+    }else{
+        monthIndex -= 1;
+    }
+    
+    self.navigationItem.title = self.allMonths[monthIndex];
+
+    NSArray *months = [[MonthStore sharedStore] allMonths];
+    int lastMonthIndex;
+    if(monthIndex == 0){
+        lastMonthIndex = 11;
+    }else{
+        lastMonthIndex = monthIndex -1;
+        
+    }
+
+    
+    Month *lastMonth = months[lastMonthIndex];
+
+    self.savingsLabel.text = [NSString stringWithFormat:@"Savings(Previous Month): $%.0f", lastMonth.balance];
+    
+    self.currentMonth = months[monthIndex];
+    
+    self.navigationItem.title = self.currentMonth.monthName;
+    
+    [self calculateTotal];
+    [self.incomeTableView reloadData];
+    [self.expenseTableView reloadData];
+}
+
+- (IBAction) nextButton:(id) sender{
+    
+    if(monthIndex == 11){
+        monthIndex = 0;
+    }else{
+        monthIndex += 1;
+    }
+    
+    self.navigationItem.title = self.allMonths[monthIndex];
+    int lastMonthIndex;
+    if(monthIndex == 0){
+        lastMonthIndex = 11;
+    }else{
+        lastMonthIndex = monthIndex -1;
+        
+    }
+    NSArray *months = [[MonthStore sharedStore] allMonths];
+ 
+    Month *lastMonth = months[lastMonthIndex];
+    self.savingsLabel.text = [NSString stringWithFormat:@"Savings(Previous Month): $%.0f", lastMonth.balance];
+    
+    self.currentMonth = months[monthIndex];
+    self.navigationItem.title = self.currentMonth.monthName;
+    
+    [self calculateTotal];
+    
+    [self.incomeTableView reloadData];
+    [self.expenseTableView reloadData];
 }
 
 // Create a new item
@@ -201,7 +290,9 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:ivc];
             
-            Income *newIncome = [[Income alloc]init];
+            Income *newIncome = [[MonthStore sharedStore] createIncome];
+            
+            [self.currentMonth addIncomesObject:newIncome];
             
             ivc.currentIncome = newIncome;
             
@@ -222,10 +313,15 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
             
             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:evc];
             
-            Expense *newExpense = [[Expense alloc]init];
+            Expense *newExpense = [[MonthStore sharedStore] createExpense];
+            
+            NSLog(@"%@",newExpense);
+            
+            [self.currentMonth addExpensesObject:newExpense];
             
             evc.currentExpense = newExpense;
-            
+            evc.currentMonth = self.currentMonth;
+
             navController.modalPresentationStyle = UIModalPresentationFormSheet;
             
             [self presentViewController:navController animated:YES completion:NULL];
@@ -234,6 +330,22 @@ didSelectRowAtIndexPath:(NSIndexPath *)indexPath
         default:
             break;
     }
+}
+
+- (void)calculateTotal{
+    NSArray *allIncome = [self.currentMonth.incomes allObjects];
+    NSArray *expenses = [self.currentMonth.expenses allObjects];
+    float totalIncome = 0.0;
+    float totalExpense = 0.0;
+    Income *income = [[MonthStore sharedStore] createIncome];
+    Expense *expense = [[MonthStore sharedStore] createExpense];
+    for (income in allIncome)
+            totalIncome += income.incomeValue;
+    for (expense in expenses)
+        totalExpense += expense.expenseValue;
+    self.currentMonth.balance = totalIncome - totalExpense;
+    
+    self.balanceLabel.text = [NSString stringWithFormat:@"Remaining Balance: $%.0f", self.currentMonth.balance];
 }
 
 

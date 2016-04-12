@@ -9,9 +9,13 @@ Functionalities completed:
 4. Rows should be grouped by the income category and the expense category.
 5. App should extended to multiple months.
 6. The last row should show the remianing balance, calculated automatically based on what user inputs.
+7. Design the UI such that it allows the user to navigate from one month to another.
+8. The past month's unused income should be carried forward to the next month.
 
 Functionalities to work on:
 1. Use Core Data framework to save and retrieve the data. (Ch 23)
 2. Use "User Preferences" for frequently used values. (Ch 26)
-3. The past month's unused income should be carried forward to the next month.
-4. Design the UI such that it allows the user to navigate from one month to another.
+
+Additional Extra Functionalities:
+1) Add an action sheet for date picker when editing the date for both "IncomeViewController and ExpenseViewController"
+2) 

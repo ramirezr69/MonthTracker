@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
+@class Month;
 @interface ItemsViewController : UIViewController < UINavigationControllerDelegate, UITextFieldDelegate, UIActionSheetDelegate>
 @property (nonatomic, strong) NSString *monthSelected;
+@property (nonatomic, strong) Month *currentMonth;
 @end

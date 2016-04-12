@@ -8,7 +8,8 @@
 
 #import "IncomeViewController.h"
 #import "Income.h"
-#import "IncomeStore.h"
+#import "Month.h"
+#import "AppDelegate.h"
 
 @interface IncomeViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *incomeSourceField;
@@ -44,8 +45,18 @@ NSString *dateString;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-  
-    // You need a NSDateFormatter that will turn a date into a simple date string
+    // Reading preferences
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *incomeSource = [defaults objectForKey:NextIncomeSourcePrefsKey];
+    float incomeAmount = [defaults integerForKey:NextIncomeAmountPrefsKey];
+    NSString *incomeDate = [defaults objectForKey:NextIncomeDatePrefsKey];
+    
+    //Display item value upon loading screen
+    self.incomeSourceField.text = incomeSource;
+    self.incomeValueField.text = [NSString stringWithFormat:@"%.2f$", incomeAmount];
+    self.incomeDateField.text = incomeDate;
+    
+    /*// You need a NSDateFormatter that will turn a date into a simple date string
     static NSDateFormatter *dateFormatter;
     if (!dateFormatter) {
         dateFormatter = [[NSDateFormatter alloc] init];
@@ -55,16 +66,15 @@ NSString *dateString;
     
     NSString *date = [dateFormatter stringFromDate:self.currentIncome.dateReceived];
     
-    //Display item value upon loading screen
+    
     self.incomeSourceField.text = self.currentIncome.sourceName;
-    self.incomeValueField.text = [NSString stringWithFormat:@"%d$",self.currentIncome.incomeValue];
-    self.incomeDateField.text = date;
+    self.incomeValueField.text = [NSString stringWithFormat:@"%.2f$",self.currentIncome.incomeValue];
+    self.incomeDateField.text = date;*/
     
 }
+
 - (void)viewDidDisappear:(BOOL)animated
 {
-    
-    NSLog(@"viewDidDisappear was called");
     [super viewWillDisappear:animated];
     
     // Clear first responder
@@ -72,10 +82,44 @@ NSString *dateString;
     
     // "Save" changes to item
     Income *saveIncome = self.currentIncome;
-    saveIncome.sourceName =  self.incomeSourceField.text;
-    saveIncome.incomeValue = [self.incomeValueField.text intValue];
     
+    NSString *source = self.incomeSourceField.text;
+    float value = [self.incomeValueField.text floatValue];
+    NSString *date = self.incomeDateField.text;
     
+    if (source != saveIncome.sourceName)
+    {
+        saveIncome.sourceName = source;
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:source forKey:NextIncomeSourcePrefsKey];
+    }
+    
+    if (value != saveIncome.incomeValue)
+    {
+        saveIncome.incomeValue = value;
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setFloat:value forKey:NextIncomeAmountPrefsKey];
+    }
+    
+    // Changing the date into the string so we can
+    // compare it to the default string
+    static NSDateFormatter *dateFormatter;
+    if (!dateFormatter)
+    {
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"EE, d LLLL yyyy HH:mm:ss Z"];
+    }
+    NSString *asgDate = [dateFormatter stringFromDate:saveIncome.dateReceived];
+    
+    if (date != asgDate)
+    {
+        saveIncome.dateReceived = [dateFormatter dateFromString:date];
+                                   
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                   [defaults setObject:date forKey:NextIncomeDatePrefsKey];
+    }
 }
 
 
@@ -90,11 +134,12 @@ NSString *dateString;
                                                                                       target:self
                                                                                       action:@selector(save:)];
             self.navigationItem.rightBarButtonItem = doneItem;
-            
+            /*
             UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                         target:self
                                                                                         action:@selector(cancelItem:)];
             self.navigationItem.leftBarButtonItem = cancelItem;
+             */
         }
     }
     
@@ -103,29 +148,15 @@ NSString *dateString;
 
 - (void)save:(id)sender
 {
-    
-    //Assign values to String
-    sourceString = self.incomeSourceField.text;
-    valueString = self.incomeValueField.text;
-    dateString = self.incomeDateField.text;
-    
-    //Create a new instance of an income
-    Income *newIncome = [[IncomeStore sharedStore] createItem];
-    
-    // Create a new BNRItem and add it to the store
-    newIncome.sourceName = sourceString;
-    newIncome.incomeValue = [valueString intValue];
-    newIncome.dateReceived = self.currentIncome.dateReceived;
-    
-    
     NSLog(@"Income Added");
     
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 
-
 - (void)cancelItem:(id)sender
 {
+    // If the user cancelled, then remoce the BNRItem from the store
+    //[[MonthStore sharedStore] removeExpense:self.currentIncome];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:self.dismissBlock];
 }
 

@@ -7,7 +7,15 @@
 //
 
 #import "AppDelegate.h"
-#import "MonthPickerViewController.h"
+#import "ItemsViewController.h"
+#import "MonthStore.h"
+
+NSString * const NextIncomeSourcePrefsKey  = @"NextNextIncomeSource";
+NSString * const NextIncomeAmountPrefsKey  = @"NextIncomeAmount";
+NSString * const NextIncomeDatePrefsKey    = @"NextIncomeDate";
+NSString * const NextExpenseTypePrefsKey   = @"NextExpenseType";
+NSString * const NextExpenseAmountPrefsKey = @"NextExpenseAmount";
+NSString * const NextExpenseDatePrefsKey   = @"NextExpenseDate";
 
 @interface AppDelegate ()
 
@@ -15,6 +23,20 @@
 
 @implementation AppDelegate
 
+// Setting
++ (void)initialize
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *factorySettings = @{
+                                        NextIncomeSourcePrefsKey: @"Job One",
+                                        NextIncomeAmountPrefsKey: @"2500",
+                                          NextIncomeDatePrefsKey: @"Tue, 24 December 2015 12:53:58 +0000",
+                                         NextExpenseTypePrefsKey: @"Food",
+                                       NextExpenseAmountPrefsKey: @"45",
+                                         NextExpenseDatePrefsKey: @"Tue, 24 December 2015 12:53:58 +0000"};
+                                      
+    [defaults registerDefaults:factorySettings];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -23,10 +45,12 @@
     
     // Creating an instance of IncomeExpensiveViewControler
     //IncomeExpensiveViewController *ievc = [[IncomeExpensiveViewController alloc] init];
-    MonthPickerViewController *ievc = [[MonthPickerViewController alloc] init];
+    //MonthPickerViewController *ievc = [[MonthPickerViewController alloc] init];
+    
+    ItemsViewController *ivc = [[ItemsViewController alloc]init];
     
     // Creating instance of UINavigationController
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:ievc];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:ivc];
     
     // Setting UINavigationController as the root view controller of the window
     self.window.rootViewController = navController;
@@ -44,6 +68,13 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    BOOL success = [[MonthStore sharedStore] saveChanges];
+    if (success) {
+        NSLog(@"Saved all of the months");
+    } else {
+        NSLog(@"Could not save any of the months");
+    }
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

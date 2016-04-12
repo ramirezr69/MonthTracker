@@ -2,19 +2,20 @@
 //  Expense.h
 //  MonthTracker
 //
-//  Created by Group7 on 11/18/15.
+//  Created by Group7 on 11/24/15.
 //
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface Expense : NSObject
+@class Month;
 
-@property (nonatomic, copy) NSString *expenseName;
-@property (nonatomic) NSDate *dateOfPurchase;
-@property (nonatomic) int expenseValue;
+@interface Expense : NSManagedObject
 
-+ (id)randomItem;
-- (id)initWithExpenseName:(NSString *)name
-             expenseValue:(int)value;
+@property (nonatomic, retain) NSDate * dateOfPurchase;
+@property (nonatomic, retain) NSString * expenseName;
+@property (nonatomic) float expenseValue;
+@property (nonatomic, retain) Month *month;
+
 @end

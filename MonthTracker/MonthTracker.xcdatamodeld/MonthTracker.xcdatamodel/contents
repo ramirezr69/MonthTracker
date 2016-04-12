@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Expense" representedClassName="Expense" syncable="YES">
+        <attribute name="dateOfPurchase" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="expenseName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="expenseValue" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="month" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Month" inverseName="expenses" inverseEntity="Month" syncable="YES"/>
+    </entity>
+    <entity name="Income" representedClassName="Income" syncable="YES">
+        <attribute name="dateReceived" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="incomeValue" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="sourceName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="month" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Month" inverseName="incomes" inverseEntity="Month" syncable="YES"/>
+    </entity>
+    <entity name="Month" representedClassName="Month" syncable="YES">
+        <attribute name="balance" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="monthName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderingValue" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="expenses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Expense" inverseName="month" inverseEntity="Expense" syncable="YES"/>
+        <relationship name="incomes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Income" inverseName="month" inverseEntity="Income" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Expense" positionX="-54" positionY="18" width="128" height="105"/>
+        <element name="Income" positionX="-54" positionY="-9" width="128" height="105"/>
+        <element name="Month" positionX="-45" positionY="27" width="128" height="120"/>
+    </elements>
+</model>
