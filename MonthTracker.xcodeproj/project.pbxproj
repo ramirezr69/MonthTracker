@@ -7,19 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE4E269F1C01537B00A9C828 /* MonthStore.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4E269E1C01537B00A9C828 /* MonthStore.m */; };
+		DE574DBF1C04F4F400A33FA9 /* Expense.m in Sources */ = {isa = PBXBuildFile; fileRef = DE574DBE1C04F4F400A33FA9 /* Expense.m */; };
+		DE574DC21C04F4F500A33FA9 /* Income.m in Sources */ = {isa = PBXBuildFile; fileRef = DE574DC11C04F4F500A33FA9 /* Income.m */; };
 		DE5B836B1BFBD019008F3F2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B836A1BFBD019008F3F2B /* main.m */; };
 		DE5B836E1BFBD019008F3F2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B836D1BFBD019008F3F2B /* AppDelegate.m */; };
 		DE5B83761BFBD019008F3F2B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE5B83751BFBD019008F3F2B /* Images.xcassets */; };
 		DE5B83791BFBD019008F3F2B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE5B83771BFBD019008F3F2B /* LaunchScreen.xib */; };
 		DE5B83851BFBD019008F3F2B /* MonthTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B83841BFBD019008F3F2B /* MonthTrackerTests.m */; };
-		DE5B83991BFBE2DB008F3F2B /* IncomeExpensiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B83971BFBE2DB008F3F2B /* IncomeExpensiveViewController.m */; };
-		DE5B839A1BFBE2DB008F3F2B /* IncomeExpensiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE5B83981BFBE2DB008F3F2B /* IncomeExpensiveViewController.xib */; };
 		DE5B83A01BFBF607008F3F2B /* IncomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B839E1BFBF607008F3F2B /* IncomeViewController.m */; };
 		DE5B83A11BFBF607008F3F2B /* IncomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE5B839F1BFBF607008F3F2B /* IncomeViewController.xib */; };
 		DE5B83A51BFBF73E008F3F2B /* ExpensiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B83A31BFBF73E008F3F2B /* ExpensiveViewController.m */; };
 		DE5B83A61BFBF73E008F3F2B /* ExpensiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE5B83A41BFBF73E008F3F2B /* ExpensiveViewController.xib */; };
-		DE5B83AA1BFC0148008F3F2B /* MonthPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B83A81BFC0148008F3F2B /* MonthPickerViewController.m */; };
-		DE5B83AB1BFC0148008F3F2B /* MonthPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE5B83A91BFC0148008F3F2B /* MonthPickerViewController.xib */; };
+		DE66553E1C026E41002FB39A /* MonthTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DE66553C1C026E41002FB39A /* MonthTracker.xcdatamodeld */; };
+		DE6E514A1C052C6A00A250E9 /* Month.m in Sources */ = {isa = PBXBuildFile; fileRef = DE6E51491C052C6A00A250E9 /* Month.m */; };
+		DEE8D1AD1BFD37FC00213F9F /* ItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DEE8D1AB1BFD37FC00213F9F /* ItemsViewController.m */; };
+		DEE8D1AE1BFD37FC00213F9F /* ItemsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEE8D1AC1BFD37FC00213F9F /* ItemsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +36,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE4E269D1C01537B00A9C828 /* MonthStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthStore.h; sourceTree = "<group>"; };
+		DE4E269E1C01537B00A9C828 /* MonthStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthStore.m; sourceTree = "<group>"; };
+		DE574DBD1C04F4F400A33FA9 /* Expense.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expense.h; sourceTree = "<group>"; };
+		DE574DBE1C04F4F400A33FA9 /* Expense.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expense.m; sourceTree = "<group>"; };
+		DE574DC01C04F4F500A33FA9 /* Income.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Income.h; sourceTree = "<group>"; };
+		DE574DC11C04F4F500A33FA9 /* Income.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Income.m; sourceTree = "<group>"; };
 		DE5B83651BFBD019008F3F2B /* MonthTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MonthTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE5B83691BFBD019008F3F2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE5B836A1BFBD019008F3F2B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -43,18 +52,18 @@
 		DE5B837E1BFBD019008F3F2B /* MonthTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonthTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE5B83831BFBD019008F3F2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE5B83841BFBD019008F3F2B /* MonthTrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonthTrackerTests.m; sourceTree = "<group>"; };
-		DE5B83961BFBE2DB008F3F2B /* IncomeExpensiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeExpensiveViewController.h; sourceTree = "<group>"; };
-		DE5B83971BFBE2DB008F3F2B /* IncomeExpensiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeExpensiveViewController.m; sourceTree = "<group>"; };
-		DE5B83981BFBE2DB008F3F2B /* IncomeExpensiveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IncomeExpensiveViewController.xib; sourceTree = "<group>"; };
 		DE5B839D1BFBF607008F3F2B /* IncomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeViewController.h; sourceTree = "<group>"; };
 		DE5B839E1BFBF607008F3F2B /* IncomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeViewController.m; sourceTree = "<group>"; };
 		DE5B839F1BFBF607008F3F2B /* IncomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IncomeViewController.xib; sourceTree = "<group>"; };
 		DE5B83A21BFBF73E008F3F2B /* ExpensiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpensiveViewController.h; sourceTree = "<group>"; };
 		DE5B83A31BFBF73E008F3F2B /* ExpensiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpensiveViewController.m; sourceTree = "<group>"; };
 		DE5B83A41BFBF73E008F3F2B /* ExpensiveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpensiveViewController.xib; sourceTree = "<group>"; };
-		DE5B83A71BFC0148008F3F2B /* MonthPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthPickerViewController.h; sourceTree = "<group>"; };
-		DE5B83A81BFC0148008F3F2B /* MonthPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthPickerViewController.m; sourceTree = "<group>"; };
-		DE5B83A91BFC0148008F3F2B /* MonthPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthPickerViewController.xib; sourceTree = "<group>"; };
+		DE66553D1C026E41002FB39A /* MonthTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MonthTracker.xcdatamodel; sourceTree = "<group>"; };
+		DE6E51481C052C6A00A250E9 /* Month.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Month.h; sourceTree = "<group>"; };
+		DE6E51491C052C6A00A250E9 /* Month.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Month.m; sourceTree = "<group>"; };
+		DEE8D1AA1BFD37FC00213F9F /* ItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemsViewController.h; sourceTree = "<group>"; };
+		DEE8D1AB1BFD37FC00213F9F /* ItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemsViewController.m; sourceTree = "<group>"; };
+		DEE8D1AC1BFD37FC00213F9F /* ItemsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ItemsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +84,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE3B3AD01BFD4EBF004A9B4B /* Expense */ = {
+			isa = PBXGroup;
+			children = (
+				DE5B83A21BFBF73E008F3F2B /* ExpensiveViewController.h */,
+				DE5B83A31BFBF73E008F3F2B /* ExpensiveViewController.m */,
+				DE5B83A41BFBF73E008F3F2B /* ExpensiveViewController.xib */,
+			);
+			name = Expense;
+			sourceTree = "<group>";
+		};
+		DE3B3AD11BFD4ED5004A9B4B /* Income */ = {
+			isa = PBXGroup;
+			children = (
+				DE5B839D1BFBF607008F3F2B /* IncomeViewController.h */,
+				DE5B839E1BFBF607008F3F2B /* IncomeViewController.m */,
+				DE5B839F1BFBF607008F3F2B /* IncomeViewController.xib */,
+			);
+			name = Income;
+			sourceTree = "<group>";
+		};
 		DE5B835C1BFBD019008F3F2B = {
 			isa = PBXGroup;
 			children = (
@@ -96,20 +125,22 @@
 		DE5B83671BFBD019008F3F2B /* MonthTracker */ = {
 			isa = PBXGroup;
 			children = (
+				DE66553C1C026E41002FB39A /* MonthTracker.xcdatamodeld */,
 				DE5B836C1BFBD019008F3F2B /* AppDelegate.h */,
 				DE5B836D1BFBD019008F3F2B /* AppDelegate.m */,
-				DE5B83A71BFC0148008F3F2B /* MonthPickerViewController.h */,
-				DE5B83A81BFC0148008F3F2B /* MonthPickerViewController.m */,
-				DE5B83A91BFC0148008F3F2B /* MonthPickerViewController.xib */,
-				DE5B83961BFBE2DB008F3F2B /* IncomeExpensiveViewController.h */,
-				DE5B83971BFBE2DB008F3F2B /* IncomeExpensiveViewController.m */,
-				DE5B83981BFBE2DB008F3F2B /* IncomeExpensiveViewController.xib */,
-				DE5B839D1BFBF607008F3F2B /* IncomeViewController.h */,
-				DE5B839E1BFBF607008F3F2B /* IncomeViewController.m */,
-				DE5B839F1BFBF607008F3F2B /* IncomeViewController.xib */,
-				DE5B83A21BFBF73E008F3F2B /* ExpensiveViewController.h */,
-				DE5B83A31BFBF73E008F3F2B /* ExpensiveViewController.m */,
-				DE5B83A41BFBF73E008F3F2B /* ExpensiveViewController.xib */,
+				DE6E51481C052C6A00A250E9 /* Month.h */,
+				DE6E51491C052C6A00A250E9 /* Month.m */,
+				DE574DC01C04F4F500A33FA9 /* Income.h */,
+				DE574DC11C04F4F500A33FA9 /* Income.m */,
+				DE574DBD1C04F4F400A33FA9 /* Expense.h */,
+				DE574DBE1C04F4F400A33FA9 /* Expense.m */,
+				DE4E269D1C01537B00A9C828 /* MonthStore.h */,
+				DE4E269E1C01537B00A9C828 /* MonthStore.m */,
+				DEE8D1AA1BFD37FC00213F9F /* ItemsViewController.h */,
+				DEE8D1AB1BFD37FC00213F9F /* ItemsViewController.m */,
+				DEE8D1AC1BFD37FC00213F9F /* ItemsViewController.xib */,
+				DE3B3AD11BFD4ED5004A9B4B /* Income */,
+				DE3B3AD01BFD4EBF004A9B4B /* Expense */,
 				DE5B83751BFBD019008F3F2B /* Images.xcassets */,
 				DE5B83771BFBD019008F3F2B /* LaunchScreen.xib */,
 				DE5B83681BFBD019008F3F2B /* Supporting Files */,
@@ -222,8 +253,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE5B839A1BFBE2DB008F3F2B /* IncomeExpensiveViewController.xib in Resources */,
-				DE5B83AB1BFC0148008F3F2B /* MonthPickerViewController.xib in Resources */,
+				DEE8D1AE1BFD37FC00213F9F /* ItemsViewController.xib in Resources */,
 				DE5B83791BFBD019008F3F2B /* LaunchScreen.xib in Resources */,
 				DE5B83761BFBD019008F3F2B /* Images.xcassets in Resources */,
 				DE5B83A11BFBF607008F3F2B /* IncomeViewController.xib in Resources */,
@@ -245,11 +275,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE4E269F1C01537B00A9C828 /* MonthStore.m in Sources */,
 				DE5B836E1BFBD019008F3F2B /* AppDelegate.m in Sources */,
+				DE66553E1C026E41002FB39A /* MonthTracker.xcdatamodeld in Sources */,
 				DE5B836B1BFBD019008F3F2B /* main.m in Sources */,
-				DE5B83991BFBE2DB008F3F2B /* IncomeExpensiveViewController.m in Sources */,
-				DE5B83AA1BFC0148008F3F2B /* MonthPickerViewController.m in Sources */,
+				DE6E514A1C052C6A00A250E9 /* Month.m in Sources */,
+				DE574DBF1C04F4F400A33FA9 /* Expense.m in Sources */,
+				DEE8D1AD1BFD37FC00213F9F /* ItemsViewController.m in Sources */,
 				DE5B83A01BFBF607008F3F2B /* IncomeViewController.m in Sources */,
+				DE574DC21C04F4F500A33FA9 /* Income.m in Sources */,
 				DE5B83A51BFBF73E008F3F2B /* ExpensiveViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,6 +473,7 @@
 				DE5B838A1BFBD019008F3F2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DE5B838B1BFBD019008F3F2B /* Build configuration list for PBXNativeTarget "MonthTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -447,8 +482,22 @@
 				DE5B838D1BFBD019008F3F2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DE66553C1C026E41002FB39A /* MonthTracker.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DE66553D1C026E41002FB39A /* MonthTracker.xcdatamodel */,
+			);
+			currentVersion = DE66553D1C026E41002FB39A /* MonthTracker.xcdatamodel */;
+			path = MonthTracker.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DE5B835D1BFBD019008F3F2B /* Project object */;
 }
